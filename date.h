@@ -1,3 +1,4 @@
+#pragma once
 #include <cstdint>
 #include <sstream>
 #include <iomanip>
@@ -19,3 +20,5 @@ private:
 ostream& operator<<(ostream& os, const Date &date);
 
 bool operator<(const Date &lhs, const Date &rhs);
+
+Date ParseDate(istream &is);

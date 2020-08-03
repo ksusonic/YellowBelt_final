@@ -4,10 +4,7 @@
 #include "node.h"
 #include "test_runner.h"
 
-#include <iostream>
 #include <stdexcept>
-#include <sstream>
-#include <vector>
 #include <cassert>
 
 using namespace std;
@@ -19,7 +16,7 @@ string ParseEvent(istream& is) {
 void TestAll();
 
 int main() {
-  TestAll();
+  // TestAll();
 
   Database db;
 
