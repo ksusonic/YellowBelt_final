@@ -1,14 +1,11 @@
-//
-// Created by ksusonic on 03.08.2020.
-//
+#include "date.h"
 
-#ifndef YELLOWBELT_FINAL_DATABASE_H
-#define YELLOWBELT_FINAL_DATABASE_H
-
-
-class database {
-
+class Database {
+public:
+    void Add(const Date &date, const string &event);
+    void Print(ostream &os) const;
+    template<typename iter>
+    iter FindIf(const bool &condition) const; // не то
+    int RemoveIf(const bool &criteria);
+    string Last(Date date);
 };
-
-
-#endif //YELLOWBELT_FINAL_DATABASE_H

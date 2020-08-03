@@ -1,14 +1,21 @@
-//
-// Created by ksusonic on 03.08.2020.
-//
+#include <cstdint>
+#include <sstream>
+#include <iomanip>
+#include <vector>
+using namespace std;
 
-#ifndef YELLOWBELT_FINAL_DATE_H
-#define YELLOWBELT_FINAL_DATE_H
-
-
-class date {
-
+class Date {
+public:
+    Date(int new_year, int new_month, int new_day);
+    int GetYear() const;
+    int GetMonth() const;
+    int GetDay() const;
+private:
+    int16_t year;
+    uint8_t month;
+    uint8_t day;
 };
 
+ostream& operator<<(ostream& os, const Date &date);
 
-#endif //YELLOWBELT_FINAL_DATE_H
+bool operator<(const Date &lhs, const Date &rhs);

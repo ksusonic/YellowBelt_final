@@ -1,5 +1,4 @@
 #include "token.h"
-
 #include <stdexcept>
 
 using namespace std;

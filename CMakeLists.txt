@@ -6,4 +6,4 @@ set(CMAKE_CXX_STANDARD 17)
 add_executable(YellowBelt_final
         main.cpp
         condition_parser.h condition_parser.cpp condition_parser_test.cpp
-        token.h token.cpp database.cpp database.h date.cpp date.h node.cpp node.h)
+        token.h token.cpp database.cpp database.h date.cpp date.h node.cpp node.h test_runner.cpp test_runner.h)
