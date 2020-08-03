@@ -11,12 +11,19 @@ using namespace std;
 
 string ParseEvent(istream& is) {
   // Реализуйте эту функцию
+  string event;
+  getline(is, event, '\n');
+  if (!isalpha(event[0])) {
+      auto it = event.find_first_not_of(' ');
+      event = event.substr(it);
+  }
+    return event;
 }
 
 void TestAll();
 
 int main() {
-  // TestAll();
+  TestAll();
 
   Database db;
 

@@ -26,7 +26,7 @@ public:
 class DateComparisonNode : public Node {
 public:
     DateComparisonNode(const Comparison &comp_to, const Date &date_to);
-    bool Evaluate(const Date &date, const string &event) override;
+    bool Evaluate(const Date &date_to, const string &event) override;
 
 private:
     const Comparison comparison;
@@ -36,7 +36,7 @@ private:
 class EventComparisonNode : public Node {
 public:
     EventComparisonNode(const Comparison &comp_to, const string &event_to);
-    bool Evaluate(const Date &date, const string &event) override;
+    bool Evaluate(const Date &date, const string &event_to) override;
 
 private:
     const Comparison comp;

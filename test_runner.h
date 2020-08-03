@@ -1,28 +1,64 @@
+#pragma once
+#include <sstream>
+#include <exception>
 #include <iostream>
-#include <vector>
+#include <string>
 #include <map>
 #include <set>
-#include <sstream>
+#include <vector>
+
 using namespace std;
 
 template <class T>
-ostream& operator << (ostream& os, const vector<T>& s);
+ostream& operator << (ostream& os, const set<T>& s) {
+    os << "{";
+    bool first = true;
+    for (const auto& x : s) {
+        if (!first) {
+            os << ", ";
+        }
+        first = false;
+        os << x;
+    }
+    return os << "}";
+}
 
-template <class T>
-ostream& operator << (ostream& os, const set<T>& s);
+template<typename T>
+std::ostream& operator << (std::ostream& os, const vector<T>& v) {
+    os << "{";
+    bool first = true;
+    for (const auto& x : v) {
+        if (!first) {
+            os << ", ";
+        }
+        first = false;
+        os << x;
+    }
+    return os << "}";
+}
 
 template <class K, class V>
-ostream& operator << (ostream& os, const map<K, V>& m);
-
+ostream& operator << (ostream& os, const map<K, V>& m) {
+    os << "{";
+    bool first = true;
+    for (const auto& kv : m) {
+        if (!first) {
+            os << ", ";
+        }
+        first = false;
+        os << kv.first << ": " << kv.second;
+    }
+    return os << "}";
+}
 
 template<class T, class U>
-void AssertEqual(const T& t, const U& u, const string& hint = {}) {
+void AssertEqual(const T& t, const U& u,
+                 const string& hint)
+{
     if (t != u) {
         ostringstream os;
-        os << "Assertion failed: " << t << " != " << u;
-        if (!hint.empty()) {
-            os << " hint: " << hint;
-        }
+        os << "Assertion failed: " << t << " != " << u
+           << " hint: " << hint;
         throw runtime_error(os.str());
     }
 }
@@ -32,7 +68,17 @@ void Assert(bool b, const string& hint);
 class TestRunner {
 public:
     template <class TestFunc>
-    void RunTest(TestFunc func, const string& test_name);
+    void RunTest(TestFunc func, const string& test_name) {
+        try {
+            func();
+            cerr << test_name << " OK" << endl;
+        }
+        catch (runtime_error& e) {
+            ++fail_count;
+            cerr << test_name << " fail: " << e.what() << endl;
+        }
+    }
+
     ~TestRunner();
 
 private:
