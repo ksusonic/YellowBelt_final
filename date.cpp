@@ -66,7 +66,6 @@ Date ParseDate(istream &date_stream) {
 
     int day;
     ok = ok && (date_stream >> day);
-    ok = ok && (date_stream.eof());
 
     if (!ok) {
         throw logic_error("Wrong date format");
