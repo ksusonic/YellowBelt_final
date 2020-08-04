@@ -4,17 +4,8 @@
 #include <vector>
 using namespace std;
 
-class Date {
-public:
-    Date(int new_year, int new_month, int new_day);
-    string GetString() const;
-    int GetYear() const;
-    int GetMonth() const;
-    int GetDay() const;
-private:
-    const int year;
-    const int month;
-    const int day;
+struct Date {
+    int year, month, day;
 };
 
 ostream& operator<<(ostream& os, const Date &date);

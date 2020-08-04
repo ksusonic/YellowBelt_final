@@ -1,10 +1,17 @@
 #pragma once
 #include "date.h"
+#include "event_set.h"
+
 #include <iostream>
-#include <vector>
-#include <set>
 #include <map>
-#include <functional>
+
+struct Entry {
+    Date date;
+    string event;
+};
+
+ostream& operator << (ostream& os, const Entry& e);
+bool operator == (const Entry& lhs, const Entry& rhs);
 
 class Database {
 public:
@@ -12,14 +19,42 @@ public:
 
     void Print(ostream &os) const; // print
 
-    vector<pair<Date, string>> FindIf(const function<bool(const Date&, const string&)> predicate) const;
+    template <typename Predicate>
+    vector<Entry> FindIf(Predicate predicate) const {
+        vector<Entry> result;
+        for (auto& kv : storage) {
+            for (const auto& event : kv.second.GetAll()) {
+                if (predicate(kv.first, event)) {
+                    result.push_back(Entry{kv.first, event});
+                }
+            }
+        }
+        return result;
+    }
 
-    int RemoveIf(const function<bool(const Date&, const string&)> predicate);
+    template <typename Predicate>
+    int RemoveIf(Predicate predicate) {
+        int result = 0;
+        for (auto& kv : storage) {
+            const Date& date = kv.first;
+            result += kv.second.RemoveIf([=](const string& event) {
+                return predicate(date, event);
+            });
+        }
+        for (auto it = storage.begin(); it != storage.end(); ) {
+            if (it->second.GetAll().empty()) {
+                storage.erase(it++);
+            } else {
+                ++it;
+            }
+        }
+        return result;
+    }
 
-    string Last(const Date &date) const;
+    Entry Last(const Date &date) const;
 
 private:
-    map<Date, pair<set<string>, vector<set<string>::iterator>>> storage;
+    map<Date, EventSet> storage;
 };
 
 ostream &operator<<(ostream &stream, const pair<Date, string>& p);

@@ -20,13 +20,13 @@ enum LogicalOperation {
 
 class Node {
 public:
-    virtual bool Evaluate(const Date&date, const string&event) = 0;
+    virtual bool Evaluate(const Date&date, const string&event) const = 0;
 };
 
 class DateComparisonNode : public Node {
 public:
     DateComparisonNode(const Comparison &comp_to, const Date &date_to);
-    bool Evaluate(const Date &date_to, const string &event) override;
+    bool Evaluate(const Date &date_to, const string &event) const override;
 
 private:
     const Comparison comparison;
@@ -36,7 +36,7 @@ private:
 class EventComparisonNode : public Node {
 public:
     EventComparisonNode(const Comparison &comp_to, const string &event_to);
-    bool Evaluate(const Date &date, const string &event_to) override;
+    bool Evaluate(const Date &date, const string &event_to) const override;
 
 private:
     const Comparison comp;
@@ -47,15 +47,13 @@ class LogicalOperationNode : public Node {
 public:
     LogicalOperationNode(const LogicalOperation operation_to,
                          const shared_ptr<Node> &lhs, const shared_ptr<Node> &rhs);
-    bool Evaluate(const Date &date, const string &event) override;
+    bool Evaluate(const Date &date, const string &event) const override;
 
 private:
     const LogicalOperation operation;
-    shared_ptr<Node> lhs_node;
-    shared_ptr<Node> rhs_node;
+    shared_ptr<Node> lhs_node, rhs_node;
 };
 
-class EmptyNode : public Node {
-public:
-    bool Evaluate(const Date &date, const string &event) override;
+struct EmptyNode : public Node {
+    bool Evaluate(const Date &date, const string &event) const override;
 };

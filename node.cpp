@@ -4,7 +4,7 @@ DateComparisonNode::DateComparisonNode(const Comparison &comp_to, const Date &da
     : comparison(comp_to)
     , date(date_to) {}
 
-bool DateComparisonNode::Evaluate(const Date &date_to, const string &event) {
+bool DateComparisonNode::Evaluate(const Date &date_to, const string &event) const {
     switch (comparison) {
         case Less:
             return date_to < date;
@@ -27,7 +27,7 @@ EventComparisonNode::EventComparisonNode(const Comparison &comp_to, const string
     , event(event_to)
     {}
 
-bool EventComparisonNode::Evaluate(const Date &date, const string &event_to) {
+bool EventComparisonNode::Evaluate(const Date &date, const string &event_to) const {
     switch (comp) {
         case Less:
             return event_to < event;
@@ -53,7 +53,7 @@ LogicalOperationNode::LogicalOperationNode(const LogicalOperation operation_to,
         , rhs_node(rhs)
     {}
 
-bool LogicalOperationNode::Evaluate(const Date &date, const string &event) {
+bool LogicalOperationNode::Evaluate(const Date &date, const string &event) const {
     switch (operation) {
         case And:
             return lhs_node->Evaluate(date,event) && rhs_node->Evaluate(date,event);
@@ -63,6 +63,6 @@ bool LogicalOperationNode::Evaluate(const Date &date, const string &event) {
     return true; // unreachable
 }
 
-bool EmptyNode::Evaluate(const Date &date, const string &event) {
+bool EmptyNode::Evaluate(const Date &date, const string &event) const {
     return true;
 }

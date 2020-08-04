@@ -1,7 +1,6 @@
 #include "database.h"
 #include "date.h"
 #include "condition_parser.h"
-#include "node.h"
 #include "test_runner.h"
 
 #include <stdexcept>
@@ -11,13 +10,12 @@ using namespace std;
 
 string ParseEvent(istream& is) {
   // Реализуйте эту функцию
-  string event;
-  getline(is, event, '\n');
-  if (!isalpha(event[0])) {
-      auto it = event.find_first_not_of(' ');
-      event = event.substr(it);
+  while (isspace(is.peek())) {
+      is.ignore();
   }
-    return event;
+  string event;
+  getline(is,event);
+  return event;
 }
 
 void TestAll();

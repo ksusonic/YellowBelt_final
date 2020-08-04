@@ -9,4 +9,4 @@ add_executable(YellowBelt_final
         token.h token.cpp
         database.cpp database.h date.cpp date.h
         node.cpp node.h
-        test_runner.cpp test_runner.h)
+        test_runner.cpp test_runner.h event_set.cpp event_set.h)
