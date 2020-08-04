@@ -16,7 +16,7 @@ void Database::Add(const Date &date, const string &event) {
 void Database::Print(ostream &os) const {
     for (const auto &item: storage) {
         for (const auto &event : item.second.second) {
-            cout << item.first << " " << *event << endl;
+            os << item.first << " " << *event << endl;
         }
     }
 }
