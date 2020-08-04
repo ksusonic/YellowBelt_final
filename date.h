@@ -12,9 +12,9 @@ public:
     int GetMonth() const;
     int GetDay() const;
 private:
-    int year;
-    int month;
-    int day;
+    const int year;
+    const int month;
+    const int day;
 };
 
 ostream& operator<<(ostream& os, const Date &date);
@@ -27,4 +27,4 @@ bool operator==(const Date &lhs, const Date &rhs);
 bool operator!=(const Date &lhs, const Date &rhs);
 
 
-Date ParseDate(istream &is);
+Date ParseDate(istream &in);

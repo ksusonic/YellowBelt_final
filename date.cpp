@@ -51,24 +51,12 @@ bool operator!=(const Date &lhs, const Date &rhs) {
            vector<int>{rhs.GetYear(), rhs.GetMonth(), rhs.GetDay()};
 }
 
-Date ParseDate(istream &date_stream) {
-    bool ok = true;
-
-    int year;
-    ok = ok && (date_stream >> year);
-    ok = ok && (date_stream.peek() == '-');
-    date_stream.ignore(1);
-
-    int month;
-    ok = ok && (date_stream >> month);
-    ok = ok && (date_stream.peek() == '-');
-    date_stream.ignore(1);
-
-    int day;
-    ok = ok && (date_stream >> day);
-
-    if (!ok) {
-        throw logic_error("Wrong date format");
-    }
+Date ParseDate(istream &in) {
+    int year, month, day;
+    in >> year;
+    in.ignore();
+    in >> month;
+    in.ignore();
+    in >> day;
     return Date(year, month, day);
 }
