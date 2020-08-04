@@ -45,7 +45,7 @@ private:
 
 class LogicalOperationNode : public Node {
 public:
-    LogicalOperationNode(const LogicalOperation operation_to,
+    LogicalOperationNode(LogicalOperation operation_to,
                          const shared_ptr<Node> &lhs, const shared_ptr<Node> &rhs);
     bool Evaluate(const Date &date, const string &event) const override;
 
@@ -57,3 +57,9 @@ private:
 struct EmptyNode : public Node {
     bool Evaluate(const Date &date, const string &event) const override;
 };
+
+void TestDateComparisonNode();
+
+void TestEventComparisonNode();
+
+void TestLogicalOperationNode();

@@ -24,10 +24,14 @@ Entry Database::Last(const Date &date) const {
 }
 
 
-ostream &operator<<(ostream &stream, const Entry& e) {
+ostream &operator<<(ostream &stream, const Entry &e) {
     return stream << e.date << ' ' << e.event;
 }
 
-bool operator==(const Entry &lhs,const Entry &rhs) {
+bool operator==(const Entry &lhs, const Entry &rhs) {
     return tie(lhs.date, lhs.event) == tie(rhs.date, rhs.event);
+}
+
+bool operator!=(const Entry &lhs, const Entry &rhs) {
+    return tie(lhs.date, lhs.event) != tie(rhs.date, rhs.event);
 }

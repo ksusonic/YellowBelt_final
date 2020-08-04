@@ -10,8 +10,11 @@ struct Entry {
     string event;
 };
 
-ostream& operator << (ostream& os, const Entry& e);
-bool operator == (const Entry& lhs, const Entry& rhs);
+ostream &operator<<(ostream &os, const Entry &e);
+
+bool operator==(const Entry &lhs, const Entry &rhs);
+
+bool operator!=(const Entry &lhs, const Entry &rhs);
 
 class Database {
 public:
@@ -19,7 +22,7 @@ public:
 
     void Print(ostream &os) const; // print
 
-    template <typename Predicate>
+    template<typename Predicate>
     vector<Entry> FindIf(Predicate predicate) const {
         vector<Entry> result;
         for (auto& kv : storage) {
@@ -57,4 +60,13 @@ private:
     map<Date, EventSet> storage;
 };
 
-ostream &operator<<(ostream &stream, const pair<Date, string>& p);
+ostream &operator<<(ostream &stream, const pair<Date, string> &p);
+
+void TestDatabaseAddAndPrint();
+
+void TestDatabaseFind();
+
+void TestDatabaseRemove();
+
+void TestDatabaseLast();
+

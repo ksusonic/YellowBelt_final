@@ -1,4 +1,7 @@
 #pragma once
+
+#include "database.h"
+
 #include <sstream>
 #include <exception>
 #include <iostream>
