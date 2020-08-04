@@ -19,6 +19,7 @@ bool DateComparisonNode::Evaluate(const Date &date_to, const string &event) {
         case NotEqual:
             return date_to != date;
     }
+    return true; // unreachable
 }
 
 EventComparisonNode::EventComparisonNode(const Comparison &comp_to, const string &event_to)
@@ -41,6 +42,7 @@ bool EventComparisonNode::Evaluate(const Date &date, const string &event_to) {
         case NotEqual:
             return event_to != event;
     }
+    return true; // unreachable
 }
 
 
@@ -58,6 +60,7 @@ bool LogicalOperationNode::Evaluate(const Date &date, const string &event) {
         case Or:
             return lhs_node->Evaluate(date,event) || rhs_node->Evaluate(date,event);
     }
+    return true; // unreachable
 }
 
 bool EmptyNode::Evaluate(const Date &date, const string &event) {

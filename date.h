@@ -1,5 +1,4 @@
 #pragma once
-#include <cstdint>
 #include <sstream>
 #include <iomanip>
 #include <vector>
@@ -13,9 +12,9 @@ public:
     int GetMonth() const;
     int GetDay() const;
 private:
-    int16_t year;
-    uint8_t month;
-    uint8_t day;
+    int year;
+    int month;
+    int day;
 };
 
 ostream& operator<<(ostream& os, const Date &date);
